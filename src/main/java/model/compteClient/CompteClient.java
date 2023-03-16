@@ -1,18 +1,20 @@
-package model.compte;
+package model.compteClient;
 
 import lombok.Builder;
 import lombok.Data;
+import model.compteClient.vo.CompteId;
+import model.compteClient.vo.DateNaissance;
+import model.compteClient.vo.Email;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 public class CompteClient {
-    private final CompteClientId id;
+    private final CompteId id;
     private final String prenom;
     private final String nom;
-    private final LocalDate dateNaissance;
+    private final DateNaissance dateNaissance;
     private final Email email;
     private final LocalDateTime dateCreation;
     private boolean abonnementActif;

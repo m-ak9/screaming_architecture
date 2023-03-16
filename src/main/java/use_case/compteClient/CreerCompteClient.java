@@ -1,4 +1,4 @@
-package use_case.compte;
+package use_case.compteClient;
 
 public class CreerCompteClient {
 }

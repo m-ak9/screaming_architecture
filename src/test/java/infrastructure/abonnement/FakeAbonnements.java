@@ -1,25 +1,27 @@
-package model.abonnement;
+package infrastructure.abonnement;
 
-import model.compte.CompteClientId;
+import model.abonnement.Abonnement;
+import model.abonnement.Abonnements;
+import model.compteClient.vo.CompteId;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeAbonnements implements Abonnements {
 
-    private final AtomicInteger count;
+    private final AtomicLong count;
     private final Map<Long, Abonnement> data;
 
     public FakeAbonnements() {
-        count = new AtomicInteger();
+        count = new AtomicLong();
         data = new ConcurrentHashMap<>();
     }
 
     @Override
     public Long save(Abonnement abonnement) {
-        data.put(abonnement.getId().getValue(), abonnement);
-        return abonnement.getId().getValue();
+        data.put(count.incrementAndGet(), abonnement);
+        return count.get();
     }
 
 
@@ -30,7 +32,7 @@ public class FakeAbonnements implements Abonnements {
 
 
     @Override
-    public Abonnement findByCompteClientId(CompteClientId id) {
+    public Abonnement findByCompteClientId(CompteId id) {
         return data.get(id.getValue());
     }
 

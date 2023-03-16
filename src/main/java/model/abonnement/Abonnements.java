@@ -1,12 +1,12 @@
 package model.abonnement;
 
-import model.compte.CompteClientId;
+import model.compteClient.vo.CompteId;
 
 public interface Abonnements {
     Long save(Abonnement abonnement);
     Long delete(Abonnement abonnement);
 
-    Abonnement findByCompteClientId(CompteClientId id);
+    Abonnement findByCompteClientId(CompteId id);
 
     Long resilier(Abonnement abonnement);
 }

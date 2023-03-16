@@ -2,32 +2,32 @@ package use_case.abonnement;
 
 import model.abonnement.Abonnement;
 import model.abonnement.Abonnements;
-import model.compte.CompteClient;
-import model.compte.CompteClientId;
-import model.compte.Comptes;
+import model.compteClient.CompteClient;
+import model.compteClient.CompteClients;
+import model.compteClient.vo.CompteId;
 
 public class ResilierAbonnement {
 
     private final Abonnements abonnements;
-    private final Comptes comptes;
+    private final CompteClients compteClients;
 
-    public ResilierAbonnement(Abonnements abonnements, Comptes comptes) {
+    public ResilierAbonnement(Abonnements abonnements, CompteClients compteClients) {
         this.abonnements = abonnements;
-        this.comptes = comptes;
+        this.compteClients = compteClients;
     }
 
-    public void resillierAbonnement(CompteClientId compteClientId) throws Exception {
+    public void resillierAbonnement(CompteId compteId) throws Exception {
 
-        CompteClient compteClient = comptes.findByCompteClientId(compteClientId);       //Shared State ? OUI
+        CompteClient compteClient = compteClients.findByCompteClientId(compteId);       //Shared State ? OUI
         Abonnement abonnement = abonnements.findByCompteClientId(compteClient.getId());     //Shared State ? OUI
 
         abonnement.verifierConditionsResilliation();       //Shared State ? NON
         compteClient.abonnementActif(false);
 
         this.abonnements.resilier(abonnement);     //Shared State ? OUI
-        this.comptes.save(compteClient);        //Shared State ? OUI
+        this.compteClients.save(compteClient);        //Shared State ? OUI
 
-        comptes.save(compteClient);   //Shared State ? YES
+        compteClients.save(compteClient);   //Shared State ? YES
 
     }
 }
