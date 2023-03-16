@@ -46,7 +46,7 @@ class ResilierAbonnementTest {
                 .id(AbonnementId.of(1L))
                 .compteId(compteId)
                 .status(AbonnementStatus.ACTIF)
-                .periodeValide(PeriodeValide.of(LocalDate.now().minusMonths(2), null))
+                .periodeValide(PeriodeValide.of(LocalDate.now().minusMonths(2), LocalDate.now()))
                 .build();
         compteClients.save(fakeCompteClient);
         abonnements.save(fakeAbonnement);
@@ -85,7 +85,7 @@ class ResilierAbonnementTest {
                 .id(AbonnementId.of(1L))
                 .compteId(compteId)
                 .status(AbonnementStatus.ACTIF)
-                .periodeValide(PeriodeValide.of(LocalDate.now().minusMonths(4), null))
+                .periodeValide(PeriodeValide.of(LocalDate.now().minusMonths(4), LocalDate.now()))
                 .build();
         compteClients.save(fakeCompteClient);
         abonnements.save(fakeAbonnement);
